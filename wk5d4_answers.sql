@@ -35,19 +35,22 @@ ORDER BY (title = 'Air')DESC , title;
 
 
 		-- Question 2 -- 
+SELECT *
+FROM film_category fc ;
 
-CREATE FUNCTION CatFilmCount(category_id INT)
-RETURN INT
+CREATE OR REPLACE FUNCTION CatFilmCount(category_id INT)
+RETURNS INT
 LANGUAGE plpgsql   
 AS $$
 	DECLARE film_count INT;
 BEGIN
 	SELECT COUNT(*) INTO film_count
-	FROM film
-	WHERE category_id = CatFilmCount.category_id
+	FROM film_category
+	WHERE fc.category_id = category_id
+	GROUP BY fc.category_id;
 	RETURN film_count;
 END;
 $$;
 
-SELECT CatFilmCount()
+SELECT CatFilmCount();
 
