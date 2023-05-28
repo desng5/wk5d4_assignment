@@ -29,10 +29,7 @@ CALL add_film('Air', 'Start of Jordan sneaker era', 2023, 1, 3, 5.99, 112, 24.99
 
 SELECT * 
 FROM film f 
-ORDER BY CASE WHEN title ILIKE 'A%' THEN 0
-ELSE 1
-END, title;
-
+ORDER BY (title = 'Air')DESC , title;
 
 
 
